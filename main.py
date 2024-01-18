@@ -11,7 +11,7 @@ colorama.init(autoreset=True)
 version = 1.0
 
 def send_webhook(message):
-    webhook_url = "https://discord.com/api/webhooks/1197172146984730624/oPja-RuajnSHLwol9iqYnPjwl8WBIfjgmOs9zwRZrNF5ZdSC1k2tPyGXP6wL8A5eIeto"
+    webhook_url = "my_webhook_url___i.dont_want_to_share_it"
     
     payload = {
         "content": message
