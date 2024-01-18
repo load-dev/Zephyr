@@ -8,10 +8,10 @@ import random
 import json
 
 colorama.init(autoreset=True)
-version = 1.0
+version = "Pre-1.0.0"
 
 def send_webhook(message):
-    webhook_url = "my_webhook_url___i.dont_want_to_share_it"
+    webhook_url = "error_discord_webhook_url"
     
     payload = {
         "content": message
@@ -46,7 +46,7 @@ def check_internet_connection():
 
 def main():
     if not is_admin():
-        print(f"{Fore.RED}Please run the script as an administrator!")
+        print(f"{Fore.RED}Please run the OS as an administrator!")
         print()
         input(f"{Fore.GREEN}Press enter to leave.{Fore.WHITE}")
         exit()
@@ -61,14 +61,14 @@ def main():
         # Path to old_data.txt
         file_path = os.path.join(zephyr_path, 'old_data.txt')
 
-        if os.path.exists(file_path) and os.path.getsize(file_path) > 0:
+        if os.path.exists(file_path) and os.path.getsize(file_path) > 0 and not check_internet_connection():
             # Run the script from old_data.txt if it exists and has content
             with open(file_path, 'r') as file:
                 script = file.read()
         elif check_internet_connection():
             # Fetch the script from the link if old_data.txt doesn't exist or is empty
             try:
-                response = requests.get("zephyr_main_code")
+                response = requests.get("main_file")
                 script = response.content.decode("utf-8")
 
                 # Write the script content to old_data.txt
@@ -120,25 +120,31 @@ def main():
             
 def get_latest_version():
     try:
-        response = requests.get("data_script")
+        response = requests.get("data_file")
         data = response.json()
         return data.get("latest_version")
     except Exception as e:
-        print(f"Error fetching latest version: {e}")
-        return None
+        id = random.randint(10000000000, 99999999999999999)
+        send_webhook(f"**__{id}__**:\n\nData Error")
+        return ""
 
 def update_required(current_version, latest_version):
-    return current_version != latest_version
+    if current_version != latest_version:
+        return True
+    else:
+        return False
 
-
-if update_required(version, get_latest_version()):
-    print(f"{Fore.RED}Please update your OS to latest version.")
-    print(f"{Fore.YELLOW}Your version: {Fore.RED}{version} (Outdated)")
-    print(f"{Fore.YELLOW}Latest version: {Fore.GREEN}{get_latest_version()}")
-    print()
-    print(f"{Fore.YELLOW}If you want to get help with installing latest version of this OS, please visit our help center, what you can reach at: {Fore.CYAN}https://zephyr.load-dev.xyz{Fore.YELLOW}. There you can select category and we will help you with preinstallation.")
-    print(f"{Fore.RED}We are sorry for this complications, but OS was updated to version where the launcher has to be updated too! Please respect our requirements and we wish you a nice experience with {Fore.GREEN}Zephyr{Fore.RED}!")
-    print()
-    input(f"{Fore.GREEN}Press enter to leave!{Fore.WHITE}\n")
+if check_internet_connection():
+    if update_required(version, get_latest_version()):
+        print(f"{Fore.RED}Please update your OS to latest version.")
+        print(f"{Fore.YELLOW}Your version: {Fore.RED}{version} (Outdated)")
+        print(f"{Fore.YELLOW}Latest version: {Fore.GREEN}{get_latest_version()}")
+        print()
+        print(f"{Fore.YELLOW}If you want to get help with installing latest version of this OS, please visit our help center, what you can reach at: {Fore.CYAN}https://zephyr.load-dev.xyz{Fore.YELLOW}. There you can select category and we will help you with preinstallation.")
+        print(f"{Fore.RED}We are sorry for this complications, but OS was updated to version where the launcher has to be updated too! Please respect our requirements and we wish you a nice experience with {Fore.GREEN}Zephyr{Fore.RED}!")
+        print()
+        input(f"{Fore.GREEN}Press enter to leave!{Fore.WHITE}\n")    
+    else:
+        main()
 else:
     main()
