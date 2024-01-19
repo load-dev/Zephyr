@@ -8,7 +8,7 @@ import random
 import json
 
 colorama.init(autoreset=True)
-version = "Pre-1.0.0"
+version = "1.0.0"
 
 def send_webhook(message):
     webhook_url = "error_discord_webhook_url"
