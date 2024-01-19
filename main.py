@@ -1,3 +1,4 @@
+# THIS IS ONLY LAUNCHER! The OS code is not visible to public!
 import requests
 import os
 import ctypes
