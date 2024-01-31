@@ -7,4 +7,4 @@
 > - Then before using our OS we recommend to read [terms](https://zephyr.load-dev.xyz/legal/terms) and [privacy policy](https://zephyr.load-dev.xyz/legal/privacy) on our wiki. Thats it for the intro. Everything you will need (tutorials and api reference) you will find out our [wiki page](https://zephyr.load-dev.xyz).
 > - See ya later :wave:
 
-Made by [LOAD](https://github.com/L0ADo) with :hearts:
+Made by [LOAD](https://github.com/load-dev) with :hearts:
